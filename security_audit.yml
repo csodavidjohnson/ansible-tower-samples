@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: yes
+
+  tasks:
+    - name: Mount Patching Mount
+      shell: mount /patching
+      changed_when: False
+  
+    - name: Run Patching Collect.Bash
+      shell: /patching/audit/collect.bash
+      changed_when: False

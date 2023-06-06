@@ -18,7 +18,7 @@
     - name: Mount PGTSAPP911 Audit Share
       mount:
         src: //pgtsapp911.markelcorp.markelna.com/audit
-        path: /tmp
+        path: /media/pgtsapp911_audit
         fstype: cifs
         opts: 'username=david.johnson,password=medical1'
         state: mounted

@@ -1,0 +1,63 @@
+---
+- hosts: all
+  become: yes
+
+  tasks:
+
+    - name: check if cifs-utils is installed
+      shell: rpm -qa | grep cifs-utils
+      register: cifsutils_installed
+      ignore_errors: True
+      check_mode: False
+      changed_when: False
+
+    - name: run script if package installed
+      shell: sudo yum install cifs-utils -y
+      when: cifsutils_installed.rc == 1
+
+    - name: Mount PGTSAPP911 Audit Share
+      mount:
+        src: //pgtsapp911.markelcorp.markelna.com/audit
+        path: /media/pgtsapp911_audit
+        fstype: cifs
+        opts: 'username=david.johnson,password=medical1'
+        state: mounted
+      become: true
+
+    - name: Create server folder
+      shell: sudo mkdir /media/pgtsapp911_audit/`hostname`
+      register: serverfolderexist
+      ignore_errors: True
+
+
+    - name: Create dated folder
+      shell: sudo mkdir /media/pgtsapp911_audit/`hostname`/$(date +"%Y-%m")
+      register: serverdatedfolderexist
+      ignore_errors: True
+
+
+    - name: Copy Login DEFS
+      shell: sudo grep ^PASS /etc/login.defs > /media/pgtsapp911_audit/`hostname`/$(date +"%Y-%m")/login.defs
+      ignore_errors: True
+
+    - name: Copy NSSWitch File
+      shell: sudo cp /etc/nsswitch.conf /media/pgtsapp911_audit/`hostname`/$(date +"%Y-%m")
+      ignore_errors: True
+
+    - name: Copy SSSD File
+      shell: sudo cp /etc/sssd/sssd.conf /media/pgtsapp911_audit/`hostname`/$(date +"%Y-%m")
+      ignore_errors: True
+
+    - name: Copy PAM.D File
+      shell: sudo cp /etc/pam.d/system-auth /media/pgtsapp911_audit/`hostname`/$(date +"%Y-%m")
+      ignore_errors: True
+
+    - name: SSSD Service Status
+      shell: sudo service sssd status > /media/pgtsapp911_audit/`hostname`/$(date +"%Y-%m")/sssd_process_status.txt
+      ignore_errors: True
+
+    - name: Unmount network share
+      mount:
+        path: /media/pgtsapp911_audit
+        state: absent
+      become: true

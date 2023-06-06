@@ -19,7 +19,7 @@
       mount:
         src: //pgtsapp911.markelcorp.markelna.com/audit
         path: /media/pgtsapp911_audit
-        fstype: smbfs
+        fstype: cifs
         opts: 'username=david.johnson,password=medical1'
         state: mounted
       become: true

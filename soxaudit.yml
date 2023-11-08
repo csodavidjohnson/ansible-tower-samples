@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: rhel6_oracle
   become: yes
 
   tasks:

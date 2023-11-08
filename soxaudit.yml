@@ -37,15 +37,15 @@
 
 
     - name: Copy Sudoer Files
-      shell: sudo cat /etc/sudoers > /media/pgtsapp911_audit/`hostname`/$(date +"%Y-%m")
+      shell: sudo cat /etc/sudoers > /media/pgtsapp911_audit/`hostname`/$(date +"%Y-%m")/sudoers
       ignore_errors: True
 
     - name: Copy Users
-      shell: sudo cat /etc/passwd /media/pgtsapp911_audit/`hostname`/$(date +"%Y-%m")
+      shell: sudo cat /etc/passwd > /media/pgtsapp911_audit/`hostname`/$(date +"%Y-%m")/passwd
       ignore_errors: True
 
     - name: Copy Group
-      shell: sudo cat /etc/group /media/pgtsapp911_audit/`hostname`/$(date +"%Y-%m")
+      shell: sudo cat /etc/group > /media/pgtsapp911_audit/`hostname`/$(date +"%Y-%m")/group
       ignore_errors: True
 
 

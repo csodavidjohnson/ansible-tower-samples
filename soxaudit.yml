@@ -1,0 +1,56 @@
+---
+- hosts: all
+  become: yes
+
+  tasks:
+
+    - name: check if cifs-utils is installed
+      shell: rpm -qa | grep cifs-utils
+      register: cifsutils_installed
+      ignore_errors: True
+      check_mode: False
+      changed_when: False
+
+    - name: run script if package installed
+      shell: sudo yum install cifs-utils -y
+      when: cifsutils_installed.rc == 1
+
+    - name: Mount PGTSAPP911 Audit Share
+      mount:
+        src: //pgtsapp911.markelcorp.markelna.com/audit
+        path: /media/pgtsapp911_audit
+        fstype: cifs
+        opts: 'username=david.johnson,password=medical1'
+        state: mounted
+      become: true
+
+    - name: Create server folder
+      shell: sudo mkdir /media/pgtsapp911_audit/`hostname`
+      register: serverfolderexist
+      ignore_errors: True
+
+
+    - name: Create dated folder
+      shell: sudo mkdir /media/pgtsapp911_audit/`hostname`/$(date +"%Y-%m")
+      register: serverdatedfolderexist
+      ignore_errors: True
+
+
+    - name: Copy Sudoer Files
+      shell: sudo cat /etc/sudoers > /media/pgtsapp911_audit/`hostname`/$(date +"%Y-%m")
+      ignore_errors: True
+
+    - name: Copy Users
+      shell: sudo cat /etc/passwd /media/pgtsapp911_audit/`hostname`/$(date +"%Y-%m")
+      ignore_errors: True
+
+    - name: Copy Group
+      shell: sudo cat /etc/group /media/pgtsapp911_audit/`hostname`/$(date +"%Y-%m")
+      ignore_errors: True
+
+
+    - name: Unmount network share
+      mount:
+        path: /media/pgtsapp911_audit
+        state: absent
+      become: true

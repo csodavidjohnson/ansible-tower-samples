@@ -12,7 +12,7 @@
       name: testvm_2
       template: template_el7
       datacenter: "{{ datacenter_name }}"
-      folder: /DC1/vm
+      folder: /GTS/Templates/Development
       state: poweredon
       cluster: "{{ cluster_name }}"
       wait_for_ip_address: yes

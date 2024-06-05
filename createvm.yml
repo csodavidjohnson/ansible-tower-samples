@@ -10,7 +10,7 @@
       password: "{{ vcenter_password }}"
       validate_certs: False
       name: testvm_2
-      template: template_el7
+      template: ITO_Win2022_NO_NIC
       datacenter: "{{ datacenter_name }}"
       folder: /GTS/Templates/Development
       state: poweredon

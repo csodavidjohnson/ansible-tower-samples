@@ -15,4 +15,7 @@
       folder: /GTS/Templates/Development
       state: poweredon
       cluster: "{{ cluster_name }}"
+      hardware:
+          memory_mb: "{{ virtualmachine_mem }}"
+          num_cpus: "{{ virtualmachine_cpu }}"
       wait_for_ip_address: yes

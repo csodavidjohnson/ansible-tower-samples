@@ -10,7 +10,7 @@
       password: "{{ vcenter_password }}"
       validate_certs: False
       name: "{{ virtualmachine_hostname }}"
-      template: ITO_Win2022_NONIC
+      template: "{{ vcenter_system_template }}"
       datacenter: "{{ datacenter_name }}"
       folder: /GTS/Templates/Development
       state: poweredon

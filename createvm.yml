@@ -19,3 +19,15 @@
           memory_mb: "{{ virtualmachine_mem }}"
           num_cpus: "{{ virtualmachine_cpu }}"
       wait_for_ip_address: yes
+  - name: Set hostnames for virtual machines
+    vmware_guest:
+      hostname: "{{ vcenter_server }}"
+      username: "{{ vcenter_username }}"
+      password: "{{ vcenter_password }}"
+      validate_certs: no
+      name: "{{ vm_name_prefix }}-{{ item }}{{ vm_hostname_suffix }}"
+      customization:
+        hostname: "{{ vm_name_prefix }}-{{ item }}"
+        state: present
+    delegate_to: localhost
+    with_sequence: start=1 end={{ vm_count }}

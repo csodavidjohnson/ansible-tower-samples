@@ -30,4 +30,4 @@
         hostname: "{{ vm_name_prefix }}-{{ item }}"
         state: present
     delegate_to: localhost
-    with_sequence: start=1 end={{ vm_count }}
+

@@ -11,6 +11,7 @@
       validate_certs: False
       name: "{{ virtualmachine_hostname }}"
       template: "{{ vcenter_system_template }}"
+      content_library: "PGTSVCA002 RIC1-RES Templates"
       datacenter: "{{ datacenter_name }}"
       folder: /GTS/Templates/Development/Ansible
       state: poweredon

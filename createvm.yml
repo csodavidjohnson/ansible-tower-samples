@@ -21,13 +21,13 @@
       wait_for_ip_address: yes
   - name: Set hostnames for virtual machines
     vmware_guest:
-      hostname: "{{ vcenter_server }}"
+      hostname: "{{ vcenter_ip }}"
       username: "{{ vcenter_username }}"
       password: "{{ vcenter_password }}"
       validate_certs: no
-      name: "{{ vm_name_prefix }}-{{ item }}{{ vm_hostname_suffix }}"
+      name: "{{ virtualmachine_hostname }}-{{ item }}{{ virtualmachine_domain }}"
       customization:
-        hostname: "{{ vm_name_prefix }}-{{ item }}"
+        hostname: "{{ virtualmachine_hostname }}-{{ item }}"
         state: present
     delegate_to: localhost
 

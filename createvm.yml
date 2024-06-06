@@ -18,7 +18,4 @@
       hardware:
           memory_mb: "{{ virtualmachine_mem }}"
           num_cpus: "{{ virtualmachine_cpu }}"
-      network_interfaces:
-          - network: "{{ virtualmachine_network }}"
-            type: "VMXNET 3"
       wait_for_ip_address: yes

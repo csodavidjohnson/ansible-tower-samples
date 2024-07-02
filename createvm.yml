@@ -18,7 +18,7 @@
       hardware:
           memory_mb: "{{ virtualmachine_mem }}"
           num_cpus: "{{ virtualmachine_cpu }}"
-      #wait_for_ip_address: yes
+
   - name: Assign tags to given virtual machine
     community.vmware:
       tag_names:

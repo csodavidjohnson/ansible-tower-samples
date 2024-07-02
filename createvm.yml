@@ -20,7 +20,7 @@
           num_cpus: "{{ virtualmachine_cpu }}"
 
   - name: Assign tags to given virtual machine
-    community.vmware:
+    community.vmware.vmware_tag:
       tag_names:
         - "{{ 'NSX-Security-Group' }}:{{ tag_name }}"
       object_name: "{{ virtualmachine_hostname }}"

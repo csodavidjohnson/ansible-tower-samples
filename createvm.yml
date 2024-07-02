@@ -19,14 +19,7 @@
           memory_mb: "{{ virtualmachine_mem }}"
           num_cpus: "{{ virtualmachine_cpu }}"
 
-  - name: Assign tags to given virtual machine
-    community.vmware.vmware_tag:
-      tag_names:
-        - "{{ 'NSX-Security-Group' }}:{{ tag_name }}"
-      object_name: "{{ virtualmachine_hostname }}"
-      object_type: VirtualMachine
-      state: add
-    register: vm_tag_info
+
 
   
 

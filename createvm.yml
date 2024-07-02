@@ -22,7 +22,7 @@
   - name: Assign tags to given virtual machine
     vmware_tag_manager:
       tag_names:
-        - "{{ NSX-Security-Group }}:{{ tag_name }}"
+        - "{{ 'NSX-Security-Group' }}:{{ tag_name }}"
       object_name: "{{ virtualmachine_hostname }}"
       object_type: VirtualMachine
       state: add

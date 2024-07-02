@@ -20,7 +20,7 @@
           num_cpus: "{{ virtualmachine_cpu }}"
       #wait_for_ip_address: yes
   - name: Assign tags to given virtual machine
-    community.vmware.vmware_tag_manager:
+    community.vmware:
       tag_names:
         - "{{ 'NSX-Security-Group' }}:{{ tag_name }}"
       object_name: "{{ virtualmachine_hostname }}"

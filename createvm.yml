@@ -19,6 +19,14 @@
           memory_mb: "{{ virtualmachine_mem }}"
           num_cpus: "{{ virtualmachine_cpu }}"
       #wait_for_ip_address: yes
+  - name: Assign tags to given virtual machine
+    vmware_tag_manager:
+      tag_names:
+        - "{{ NSX-Security-Group }}:{{ tag_name }}"
+      object_name: "{{ virtualmachine_hostname }}"
+      object_type: VirtualMachine
+      state: add
+    register: vm_tag_info
 
   
 

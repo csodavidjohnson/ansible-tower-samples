@@ -1,8 +1,6 @@
 ---
 - name: Rename virtual machine from old name to new name using UUID
   gather_facts: no
-  vars_files:
-    - vcenter_vars.yml
   vars:
     ansible_python_interpreter: "/usr/bin/env python3"
   hosts: localhost
@@ -10,8 +8,6 @@
     - set_fact:
         vm_name: {{ virtualmachine_hostname }}
         new_vm_name: "{{ virtualmachine_hostname"_DO_NOT_DELETE" }}"
-        datacenter: "DC1"
-        cluster_name: "DC1_C1"
 
     - name: Get VM "{{ virtualmachine_hostname }}" uuid
       vmware_guest_facts:

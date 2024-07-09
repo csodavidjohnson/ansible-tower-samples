@@ -8,8 +8,8 @@
     - set_fact:
         vm_name: "{{ virtualmachine_hostname }}"
         new_vm_name: "PGTSDAV089_DO_NOT_DELETE"
-        datacenter: "{{ datacenter }}"
-        cluster_name: "{{ cluster }}"
+        datacenter: "{{ datacenter_name }}"
+        cluster_name: "{{ cluster_name }}"
 
     - name: Get VM "{{ virtualmachine_hostname }}" uuid
       vmware_guest_facts:
@@ -17,8 +17,8 @@
         username: "{{ vcenter_username }}"
         password: "{{ vcenter_password }}"
         validate_certs: False
-        datacenter: "{{ datacenter }}"
-        folder: "/{{datacenter}}/vm"
+        datacenter: "{{ datacenter_name }}"
+        folder: "/GTS/Templates/Development/Ansible"
         name: "{{ vm_name }}"
       register: vm_facts
 
@@ -28,6 +28,6 @@
         username: "{{ vcenter_user }}"
         password: "{{ vcenter_pass }}"
         validate_certs: False
-        cluster: "{{ cluster }}"
+        cluster: "{{ cluster_name }}"
         uuid: "{{ vm_facts.instance.hw_product_uuid }}"
         name: "{{ new_vm_name }}"

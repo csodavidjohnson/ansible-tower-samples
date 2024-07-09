@@ -5,12 +5,29 @@
     ansible_python_interpreter: "/usr/bin/env python3"
   hosts: localhost
   tasks:
-    - name: Rename "{{ virtualmachine_hostname }}" to "{{ virtualmachine_hostname_DONOTDELETE }}"
-      vmware_guest:
+    - set_fact:
+        vm_name: "{{ virtualmachine_hostname }}"
+        new_vm_name: "PGTSDAV089_DO_NOT_DELETE"
+        datacenter: "{{ datacenter }}"
+        cluster_name: "{{ cluster }}"
+
+    - name: Get VM "{{ virtualmachine_hostname }}" uuid
+      vmware_guest_facts:
         hostname: "{{ vcenter_ip }}"
         username: "{{ vcenter_username }}"
         password: "{{ vcenter_password }}"
         validate_certs: False
-        cluster: "{{ cluster_name }}"
+        datacenter: "{{ datacenter }}"
+        folder: "/{{datacenter}}/vm"
+        name: "{{ vm_name }}"
+      register: vm_facts
+
+    - name: Rename "{{ vm_name }}" to "{{ new_vm_name }}"
+      vmware_guest:
+        hostname: "{{ vcenter_server }}"
+        username: "{{ vcenter_user }}"
+        password: "{{ vcenter_pass }}"
+        validate_certs: False
+        cluster: "{{ cluster }}"
         uuid: "{{ vm_facts.instance.hw_product_uuid }}"
-        name: "{{ virtualmachine_hostname_DONOTDELETE }}"
+        name: "{{ new_vm_name }}"

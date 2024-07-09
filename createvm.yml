@@ -24,7 +24,7 @@
     vmware_tag_manager:
       tag_names:
         - "{{ category_name }}:{{ tag_name }}"
-      object_name: "{{ vm_name }}"
+      object_name: "{{ virtualmachine_hostname }}"
       object_type: VirtualMachine
       state: add
     register: vm_tag_info

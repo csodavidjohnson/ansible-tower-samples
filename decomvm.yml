@@ -24,9 +24,9 @@
 
     - name: Rename "{{ vm_name }}" to "{{ new_vm_name }}"
       vmware_guest:
-        hostname: "{{ vcenter_server }}"
-        username: "{{ vcenter_user }}"
-        password: "{{ vcenter_pass }}"
+        hostname: "{{ vcenter_ip }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
         validate_certs: False
         cluster: "{{ cluster_name }}"
         uuid: "{{ vm_facts.instance.hw_product_uuid }}"

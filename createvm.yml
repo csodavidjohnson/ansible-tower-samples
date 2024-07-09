@@ -19,15 +19,6 @@
           memory_mb: "{{ virtualmachine_mem }}"
           num_cpus: "{{ virtualmachine_cpu }}"
 
-  - name: Assign tags to given virtual machine
-    vmware_tag_manager:
-        tag_names:
-          - "{{ MSX-Security-Group }}:{{ tag_name }}"
-        object_name: "{{ virtualmachine_hostname }}"
-        object_type: VirtualMachine
-        state: add
-      register: vm_tag_info
-
   
 
 

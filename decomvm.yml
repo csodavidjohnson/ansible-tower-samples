@@ -7,7 +7,7 @@
   tasks:
     - set_fact:
         vm_name: {{ virtualmachine_hostname }}
-        new_vm_name: "{{ virtualmachine_hostname"_DO_NOT_DELETE" }}"
+        new_vm_name: "{{ virtualmachine_hostname_DO_NOT_DELETE }}"
 
     - name: Get VM "{{ virtualmachine_hostname }}" uuid
       vmware_guest_facts:

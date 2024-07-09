@@ -8,8 +8,8 @@
   hosts: localhost
   tasks:
     - set_fact:
-        vm_name: "old_vm_name"
-        new_vm_name: "new_vm_name"
+        vm_name: {{ vm_old_name }}
+        new_vm_name: "{{ vm_old_name"_DO_NOT_DELETE" }}"
         datacenter: "DC1"
         cluster_name: "DC1_C1"
 

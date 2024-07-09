@@ -15,6 +15,7 @@
       folder: /GTS/Templates/Development/Ansible
       state: poweredon
       cluster: "{{ cluster_name }}"
+      tags: "{{ tag_name }}"
       hardware:
           memory_mb: "{{ virtualmachine_mem }}"
           num_cpus: "{{ virtualmachine_cpu }}"

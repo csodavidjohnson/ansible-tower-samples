@@ -2,6 +2,8 @@
 - name: Create a VM from a template
   hosts: localhost
   gather_facts: no
+  vars:
+    category_name: "NSX-Security-Group"
   tasks:
   - name: Clone the template
     vmware_guest:
@@ -18,7 +20,14 @@
       hardware:
           memory_mb: "{{ virtualmachine_mem }}"
           num_cpus: "{{ virtualmachine_cpu }}"
-
+  - name: Assign tags to given virtual machine
+    vmware_tag_manager:
+      tag_names:
+        - "{{ category_name }}:{{ tag_name }}"
+      object_name: "{{ vm_name }}"
+      object_type: VirtualMachine
+      state: add
+    register: vm_tag_info
   
 
 

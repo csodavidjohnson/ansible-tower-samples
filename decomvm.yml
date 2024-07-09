@@ -5,22 +5,7 @@
     ansible_python_interpreter: "/usr/bin/env python3"
   hosts: localhost
   tasks:
-    - set_fact:
-        vm_name: {{ virtualmachine_hostname }}
-        new_vm_name: "{{ virtualmachine_hostname_DO_NOT_DELETE }}"
-
-    - name: Get VM "{{ virtualmachine_hostname }}" uuid
-      vmware_guest_facts:
-        hostname: "{{ vcenter_ip }}"
-        username: "{{ vcenter_username }}"
-        password: "{{ vcenter_password }}"
-        validate_certs: False
-        datacenter: "{{ datacenter_name  }}"
-        folder: /GTS/Templates/Development/Ansible
-        name: "{{ virtualmachine_hostnamee }}"
-      register: vm_facts
-
-    - name: Rename "{{ vm_name }}" to "{{ new_vm_name }}"
+    - name: Rename "{{ virtualmachine_hostname }}" to "{{ virtualmachine_hostname_DONOTDELETE }}"
       vmware_guest:
         hostname: "{{ vcenter_ip }}"
         username: "{{ vcenter_username }}"
@@ -28,4 +13,4 @@
         validate_certs: False
         cluster: "{{ cluster_name }}"
         uuid: "{{ vm_facts.instance.hw_product_uuid }}"
-        name: "{{ new_vm_name }}"
+        name: "{{ virtualmachine_hostname_DONOTDELETE }}"

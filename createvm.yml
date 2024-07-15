@@ -13,8 +13,8 @@
       validate_certs: False
       name: "{{ virtualmachine_hostname }}"
       template: "{{ vcenter_system_template }}"
-      datastore: Shared_NFS_Volume
-      folder: vm
+      datacenter: "{{ datacenter_name }}"
+      folder: /GTS/Templates/Production/
       state: poweredon
       cluster: "{{ cluster_name }}"
       hardware:

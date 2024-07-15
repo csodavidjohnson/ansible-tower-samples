@@ -14,7 +14,7 @@
       name: "{{ virtualmachine_hostname }}"
       template: "{{ vcenter_system_template }}"
       datacenter: "{{ datacenter_name }}"
-      folder: /GTS/Templates/Production/
+      folder: /GTS/Templates/Development/Ansible
       state: poweredon
       cluster: "{{ cluster_name }}"
       hardware:
